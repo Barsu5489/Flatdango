@@ -1,0 +1,15 @@
+.movie{
+    display: flex;
+}
+.img > img{
+    border: 1px solid black;
+    height: 300px;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+h1{
+    font-size: xx-large;
+    color: green;
+}
