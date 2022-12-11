@@ -1,14 +1,13 @@
 function firstMovie()
 {
-    // document.getElementsByName('div').addEventListener('click', ()=>{
-    //     console.log('click')
-    // })
+   
     fetch('http://localhost:3000/films/1')
     .then(res => res.json())
     .then(data => 
         {   
             console.log(data)
             const movie = document.querySelector('.movie');
+            //Rendering first
             movie.innerHTML = 
             `
             <div class="img">
@@ -20,7 +19,6 @@ function firstMovie()
                 <li>Run Time: ${data.runtime} minutes</li>
                 <li>Show Time: ${data.showtime}</li>
                 <li>Available Tickets: ${data.capacity - data.tickets_sold}</li>
-                <button onclick =""> buy ticket</button>
               </ul>
             </div>
             `
@@ -51,7 +49,7 @@ function renderData(data)
             const movieDetails = document.createElement('div')
             movieDetails.classList.add('movie-details')
             const movieTitle = document.createElement('h1')
-            //
+            movieTitle.classList.add('heading')
             movieDetails.innerText = data[i].title
             section.appendChild(imgDiv)
             section.appendChild(movieDetails)
@@ -60,49 +58,44 @@ function renderData(data)
             const l1 = document.createElement('li')
             const li2 = document.createElement('li')
             const li3 = document.createElement('li')
-            li3.classList.add('list4')
+            const btn = document.createElement('button')
+            btn.innerText = 'Buy Ticket'
+            btn.classList.add('list4')
             l1.innerText = data[i].runtime
             li2.innerText = data[i].showtime
             li3.innerText = data[i].capacity - data[i].tickets_sold
             section.appendChild(l1)
             section.appendChild(li2)
             section.appendChild(li3)
+            section.appendChild(btn)
 
-            li3.addEventListener('click',()=>{
-                console.log('ll')
+                //console.log('ll')
                 document.querySelector('.list4').addEventListener('click', ()=>
                 {
-                    li3.innerHTML = `<li>${data[i].capacity - data[i].tickets_sold - 1}</li>`
+                    //li3.style.display = 'none'
+                    if(li3.innerText > 0)
+                    {
+                        li3.style.display = 'block'
+                    }
+                    else if(li3.innerText == 0)
+                    {
+                        li3.style.display = 'none'
+                    }
+                    li3.innerText = (data[i].capacity - data[i].tickets_sold) - 1
+                    
+                    
+
                 })
-            })
-
-        //     const avail =  data[i].capacity - data[i].tickets_sold
-        //    const n =  document.createElement('button')
-        //    n.textContent= 'buy ticket'
-        //    section.appendChild(n)
-        //    n.addEventListener('click',()=>
-        //    {
-        //         console.log('clicked')
-        //    })
-
-        //     section.innerHTML += 
-        //     `
-        //     <button>buy ticket</button>
-        //     <div class="img">
-        //         <img src="${data[i].poster}" alt="poster" srcset="">
-        //     </div>
-        //     <div class="movie-details">
-        //     <h1>${data[i].title}</h1>
-        //       <ul id="details">
-        //         <li>Run Time: ${data[i].runtime} minutes</li>
-        //         <li>Show Time: ${data[i].showtime}</li>
-        //         <li id="li">Available Tickets: ${avail}</li> 
-        //       </ul>
-
-        //     </div>
-        //     `
+        
         }
+}
 
+document.addEventListener('DOMContentLoaded', ()=>
+{
+    firstMovie()
+    movieData()
+    
+})
 // function movieData()
 // {
     
@@ -144,11 +137,29 @@ function renderData(data)
 //         }
        // const section = document.querySelector('.section');
         // section.innerHTML = render
-}
 
-document.addEventListener('DOMContentLoaded', ()=>
-{
-    firstMovie()
-    movieData()
-    
-})
+        //     const avail =  data[i].capacity - data[i].tickets_sold
+        //    const n =  document.createElement('button')
+        //    n.textContent= 'buy ticket'
+        //    section.appendChild(n)
+        //    n.addEventListener('click',()=>
+        //    {
+        //         console.log('clicked')
+        //    })
+
+        //     section.innerHTML += 
+        //     `
+        //     <button>buy ticket</button>
+        //     <div class="img">
+        //         <img src="${data[i].poster}" alt="poster" srcset="">
+        //     </div>
+        //     <div class="movie-details">
+        //     <h1>${data[i].title}</h1>
+        //       <ul id="details">
+        //         <li>Run Time: ${data[i].runtime} minutes</li>
+        //         <li>Show Time: ${data[i].showtime}</li>
+        //         <li id="li">Available Tickets: ${avail}</li> 
+        //       </ul>
+
+        //     </div>
+        //     `
