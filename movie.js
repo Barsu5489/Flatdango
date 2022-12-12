@@ -1,13 +1,19 @@
+/*
+ * firstMovie - function to fetch and render first movie
+ * mMovieData - func
+ * renderData - function to render data to DOM   
+*/
+
 function firstMovie()
 {
    
-    fetch('http://localhost:3000/films/1')
+    fetch('http://localhost:8000/films/1')
     .then(res => res.json())
     .then(data => 
         {   
             console.log(data)
             const movie = document.querySelector('.movie');
-            //Rendering first
+            //Rendering first movie
             movie.innerHTML = 
             `
             <div class="img">
@@ -27,15 +33,18 @@ function firstMovie()
 function movieData()
 {
     
-    fetch('http://localhost:3000/films')
+    fetch('http://localhost:8000/films')
     .then(res =>res.json())
-    .then(data => renderData(data))    
+    .then(data => 
+        {
+            renderData(data)
+        })    
 }
 let render = "";
 function renderData(data)
 {
-  ///  const section = document.querySelector('.section');
-    for(let i =0; i< data.length; i++)
+  //  const section = document.querySelector('.section');
+    for(let i =1; i< data.length; i++)
         {   
             // Container to all elements
             const section = document.querySelector('.section');
@@ -48,13 +57,16 @@ function renderData(data)
             //creating div to contain movie details
             const movieDetails = document.createElement('div')
             movieDetails.classList.add('movie-details')
+            //creating header tag
             const movieTitle = document.createElement('h1')
             movieTitle.classList.add('heading')
             movieDetails.innerText = data[i].title
+            // Appending elements into the container div
             section.appendChild(imgDiv)
             section.appendChild(movieDetails)
             imgDiv.appendChild(img)
             imgDiv.appendChild(movieTitle)
+            // Creating list elements and button 
             const l1 = document.createElement('li')
             const li2 = document.createElement('li')
             const li3 = document.createElement('li')
@@ -64,26 +76,25 @@ function renderData(data)
             l1.innerText = data[i].runtime
             li2.innerText = data[i].showtime
             li3.innerText = data[i].capacity - data[i].tickets_sold
+            //Appending li and button
             section.appendChild(l1)
             section.appendChild(li2)
             section.appendChild(li3)
             section.appendChild(btn)
 
-                //console.log('ll')
-                document.querySelector('.list4').addEventListener('click', ()=>
+                // Implementing button functionality
+               const btnn =  document.querySelector('.list4').addEventListener('click', (e)=>
                 {
-                    //li3.style.display = 'none'
-                    if(li3.innerText > 0)
+                    if(li3.textContent > 0)
                     {
                         li3.style.display = 'block'
+                        li3.textContent --
                     }
-                    else if(li3.innerText == 0)
+                    else if(li3.textContent == 0)
                     {
-                        li3.style.display = 'none'
-                    }
-                    li3.innerText = (data[i].capacity - data[i].tickets_sold) - 1
-                    
-                    
+                        btn.style.display = 'none'
+                        li3.textContent = 'sold Out'
+                    }        
 
                 })
         
@@ -96,70 +107,3 @@ document.addEventListener('DOMContentLoaded', ()=>
     movieData()
     
 })
-// function movieData()
-// {
-    
-//     fetch('http://localhost:3000/films')
-//     .then(res =>res.json())
-//     .then(data => renderData(data))    
-// }
-// let render = "";
-// function renderData(data)
-// {
-//     const section = document.querySelector('.section');
-//     for(let i =0; i< data.length; i++)
-//         {
-//             const avail =  data[i].capacity - data[i].tickets_sold
-//            const n =  document.createElement('button')
-//            n.textContent= 'buy ticket'
-//            section.appendChild(n)
-//            n.addEventListener('click',()=>
-//            {
-//                 console.log('clicked')
-//            })
-
-//             section.innerHTML += 
-//             `
-//             <button>buy ticket</button>
-//             <div class="img">
-//                 <img src="${data[i].poster}" alt="poster" srcset="">
-//             </div>
-//             <div class="movie-details">
-//             <h1>${data[i].title}</h1>
-//               <ul id="details">
-//                 <li>Run Time: ${data[i].runtime} minutes</li>
-//                 <li>Show Time: ${data[i].showtime}</li>
-//                 <li id="li">Available Tickets: ${avail}</li> 
-//               </ul>
-
-//             </div>
-//             `
-//         }
-       // const section = document.querySelector('.section');
-        // section.innerHTML = render
-
-        //     const avail =  data[i].capacity - data[i].tickets_sold
-        //    const n =  document.createElement('button')
-        //    n.textContent= 'buy ticket'
-        //    section.appendChild(n)
-        //    n.addEventListener('click',()=>
-        //    {
-        //         console.log('clicked')
-        //    })
-
-        //     section.innerHTML += 
-        //     `
-        //     <button>buy ticket</button>
-        //     <div class="img">
-        //         <img src="${data[i].poster}" alt="poster" srcset="">
-        //     </div>
-        //     <div class="movie-details">
-        //     <h1>${data[i].title}</h1>
-        //       <ul id="details">
-        //         <li>Run Time: ${data[i].runtime} minutes</li>
-        //         <li>Show Time: ${data[i].showtime}</li>
-        //         <li id="li">Available Tickets: ${avail}</li> 
-        //       </ul>
-
-        //     </div>
-        //     `
