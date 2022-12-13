@@ -44,9 +44,8 @@ let render = "";
 function renderData(data)
 {
   //  const section = document.querySelector('.section');
-  data.forEach(data =>{
-    // for(let i =1; i< data.length; i++)
-    //     {   
+    for(let i =1; i< data.length; i++)
+        {   
             // Container to all elements
             const section = document.querySelector('.section');
             //Creating image div container 
@@ -54,14 +53,14 @@ function renderData(data)
             imgDiv.classList.add('img')
             //creating image tag
             const img = document.createElement('img')
-            img.src = data.poster
+            img.src = data[i].poster
             //creating div to contain movie details
             const movieDetails = document.createElement('div')
             movieDetails.classList.add('movie-details')
             //creating header tag
             const movieTitle = document.createElement('h1')
             movieTitle.classList.add('heading')
-            movieDetails.innerText = data.title
+            movieDetails.innerText = data[i].title
             // Appending elements into the container div
             section.appendChild(imgDiv)
             section.appendChild(movieDetails)
@@ -74,9 +73,9 @@ function renderData(data)
             const btn = document.createElement('button')
             btn.innerText = 'Buy Ticket'
             btn.classList.add('list4')
-            l1.innerText = data.runtime
-            li2.innerText = data.showtime
-            li3.innerText = data.capacity - data.tickets_sold
+            l1.innerText = data[i].runtime
+            li2.innerText = data[i].showtime
+            li3.innerText = data[i].capacity - data[i].tickets_sold
             //Appending li and button
             section.appendChild(l1)
             section.appendChild(li2)
@@ -99,7 +98,7 @@ function renderData(data)
 
                 })
         
-            })
+        }
 }
 
 document.addEventListener('DOMContentLoaded', ()=>
