@@ -60,7 +60,7 @@ function renderData(data)
             //creating header tag
             const movieTitle = document.createElement('h1')
             movieTitle.classList.add('heading')
-            movieDetails.innerText = data[i].title
+            movieTitle.innerText = data[i].title
             // Appending elements into the container div
             section.appendChild(imgDiv)
             section.appendChild(movieDetails)
@@ -73,8 +73,8 @@ function renderData(data)
             const btn = document.createElement('button')
             btn.innerText = 'Buy Ticket'
             btn.classList.add('list4')
-            l1.innerText = data[i].runtime
-            li2.innerText = data[i].showtime
+            l1.innerText = `Run Time: ${data[i].runtime}`
+            li2.innerText = `Show Time: ${data[i].showtime}`
             li3.innerText = data[i].capacity - data[i].tickets_sold
             //Appending li and button
             section.appendChild(l1)
