@@ -1,5 +1,11 @@
+*{
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.01)
+}
 .movie{
     display: flex;
+    justify-content: space-around;
 }
 .img > img{
     border: 1px solid black;
