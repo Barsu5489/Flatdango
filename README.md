@@ -30,12 +30,9 @@ Open a terminal / command line interface on your computer
 
           json-server --watch db.json
 
-- Run the application by:
-
-         1) Right click on index.html file
-         2) Click on copy path
-         3) Open chrom browser
-         4) Paste the copied path and press enter
+- Run the application by clicking the link below
+  - https://barsu5489.github.io/Flatdango/
+         
          
       
  ## Core Deliverables
@@ -53,3 +50,11 @@ Buy a ticket for a movie. After clicking the "Buy Ticket" button, I should
    see the number of available tickets decreasing on the frontend. I should not
    be able to buy a ticket if the showing is sold out (if there are 0 tickets
    available). **No persistence is needed for this feature**.
+
+
+### AUTHOR
+This project was written by:
+   - Emmanuel Barsosio [https://github.com/Barsu5489]
+   
+### LICENCE
+This project is licenced under Apache 2.0
