@@ -90,7 +90,7 @@ function renderData(data)
                         li3.style.display = 'block'
                         li3.textContent --
                     }
-                    else if(li3.textContent < 0)
+                    else if(li3.textContent <= 0)
                     {
                         btn.style.display = 'none'
                         li3.textContent = 'sold Out'
