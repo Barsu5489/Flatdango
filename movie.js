@@ -7,7 +7,7 @@
 function firstMovie()
 {
    
-    fetch('http://localhost:8000/films/1')
+    fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/db')
     .then(res => res.json())
     .then(data => 
         {   
@@ -17,14 +17,14 @@ function firstMovie()
             movie.innerHTML = 
             `
             <div class="img">
-                <img src="${data.poster}" alt="poster" srcset="">
+                <img src="${data.films[0].poster}" alt="poster" srcset="">
             </div>
             <div class="movie-details">
-            <h1>${data.title}</h1>
+            <h1>${data.films[0].title}</h1>
               <ul id="details">
-                <li>Run Time: ${data.runtime} minutes</li>
-                <li>Show Time: ${data.showtime}</li>
-                <li>Available Tickets: ${data.capacity - data.tickets_sold}</li>
+                <li>Run Time: ${data.films[0].runtime} minutes</li>
+                <li>Show Time: ${data.films[0].showtime}</li>
+                <li>Available Tickets: ${data.films[0].capacity - data.films[0].tickets_sold}</li>
               </ul>
             </div>
             `
@@ -33,7 +33,7 @@ function firstMovie()
 function movieData()
 {
     
-    fetch('http://localhost:8000/films')
+    fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/db')
     .then(res =>res.json())
     .then(data => 
         {
@@ -44,7 +44,7 @@ let render = "";
 function renderData(data)
 {
   //  const section = document.querySelector('.section');
-    for(let i =1; i< data.length; i++)
+    for(let i =1; i< data.films.length; i++)
         {   
             // Container to all elements
             const section = document.querySelector('.section');
@@ -53,14 +53,14 @@ function renderData(data)
             imgDiv.classList.add('img')
             //creating image tag
             const img = document.createElement('img')
-            img.src = data[i].poster
+            img.src = data.films[i].poster
             //creating div to contain movie details
             const movieDetails = document.createElement('div')
             movieDetails.classList.add('movie-details')
             //creating header tag
             const movieTitle = document.createElement('h1')
             movieTitle.classList.add('heading')
-            movieTitle.innerText = data[i].title
+            movieTitle.innerText = data.films[i].title
             // Appending elements into the container div
             section.appendChild(imgDiv)
             section.appendChild(movieDetails)
@@ -73,9 +73,9 @@ function renderData(data)
             const btn = document.createElement('button')
             btn.innerText = 'Buy Ticket'
             btn.classList.add('list4')
-            l1.innerText = `Run Time: ${data[i].runtime}`
-            li2.innerText = `Show Time: ${data[i].showtime}`
-            li3.innerText = data[i].capacity - data[i].tickets_sold
+            l1.innerText = `Run Time: ${data.films[i].runtime}`
+            li2.innerText = `Show Time: ${data.films[i].showtime}`
+            li3.innerText = data.films[i].capacity - data.films[i].tickets_sold
             //Appending li and button
             section.appendChild(l1)
             section.appendChild(li2)
