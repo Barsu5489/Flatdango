@@ -1,0 +1,23 @@
+{
+  "name": "flatdango",
+  "version": "1.0.0",
+  "description": "## Introduction - For this assessment, you'll be working on Flatdango. - Flatiron Movie Theater is open for business! You will be building out an   application, Flatdango, that allows a user to purchase movie tickets from the   theater.",
+  "main": "movie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barsu5489/Flatdango.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Barsu5489/Flatdango/issues"
+  },
+  "homepage": "https://github.com/Barsu5489/Flatdango#readme",
+  "dependencies": {
+    "json-server": "^0.17.1"
+  }
+}
