@@ -36,6 +36,7 @@ function firstMovie(movieData) {
       const movieTitle = document.createElement('h1');
       movieTitle.innerText = data.films[i].title;
   
+      
       // Appending movie title to the DOM
       const section = document.querySelector('.section');
       section.appendChild(movieTitle);
