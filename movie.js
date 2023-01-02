@@ -1,56 +1,58 @@
-/*
- * firstMovie - function to fetch and render first movie
- * MovieData - func
- * renderData - function to render data to DOM   
-*/
+// Make a GET request to the /films/1 endpoint to retrieve the first movie's data
+fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/films/1')
+  .then(response => response.json())
+  .then(data => {
+    // Populate the page with the movie's data
+    document.getElementById('poster').src = data.poster;
+    document.getElementById('title').innerHTML = data.title;
+    document.getElementById('runtime').innerHTML = data.runtime;
+    document.getElementById('showtime').innerHTML = data.showtime;
+    document.getElementById('tickets').innerHTML = data.capacity - data.tickets_sold;
+  });
 
-function firstMovie(movieData) {
-    // Replace the content of movie.innerHTML with the content of the clicked movie
-    const movie = document.querySelector('.movie');
-    movie.innerHTML = `
-      <div class="img">
-        <img src="${movieData.poster}" alt="poster" srcset="">
-      </div>
-      <div class="movie-details">
-        <h1>${movieData.title}</h1>
-        <ul id="details">
-          <li>Run Time: ${movieData.runtime} minutes</li>
-          <li>Show Time: ${movieData.showtime}</li>
-          <li>Available Tickets: ${movieData.capacity - movieData.tickets_sold}</li>
-        </ul>
-      </div>
-    `;
-  }
-  
-  function movieData() {
-    fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/db')
-      .then((res) => res.json())
-      .then((data) => {
-        renderData(data);
-      });
-  }
-  
-  function renderData(data) {
-    for (let i = 1; i < data.films.length; i++) {
-      // creating header tag
-      const movieTitle = document.createElement('h1');
-      movieTitle.innerText = data.films[i].title;
-  
-      
-      // Appending movie title to the DOM
-      const section = document.querySelector('.section');
-      section.appendChild(movieTitle);
-  
-      // Add a click event listener to the movie title element
-      movieTitle.addEventListener('click', (event) => {
-        // Call the firstMovie function and pass it the data for the clicked movie
-        firstMovie(data.films[i]);
-      });
+// Make a GET request to the /films endpoint to retrieve the list of movies
+fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/films')
+  .then(response => response.json())
+  .then(data => {
+    // Iterate through the list of movies and create a new li element for each movie
+    for (const movie of data) {
+      const li = document.createElement('li');
+      li.className = 'film item';
+      li.innerHTML = movie.title;
+      document.getElementById('films').appendChild(li);
     }
-  }
+  });
+
+// Add an event listener to the "Buy Ticket" button
+document.getElementById('buy-ticket').addEventListener('click', () => {
+  // Make a POST request to the /tickets/:id endpoint to purchase a ticket
+  fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/films', { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+      // Update the number of available tickets on the frontend
+      const tickets = document.getElementById('tickets');
+      tickets.innerHTML = data.capacity - data.tickets_sold;
+
+      // Disable the "Buy Ticket" button if the showing is sold out
+      if (tickets.innerHTML === '0') {
+        document.getElementById('buy-ticket').disabled = true;
+      }
+    });
+});
+
+// Attach the event listener to the parent element
+document.getElementById('movie-details').addEventListener('click', event => {
+    // Check if the event was triggered by the title element
+    if (event.target.id === 'title') {
+      // Retrieve the title's content
+      const title = event.target.innerHTML;
   
-  document.addEventListener('DOMContentLoaded', () => {
-    movieData();
-    firstMovie();
+      // Update the innerHTML of the relevant elements in the movie details
+      document.getElementById('title').innerHTML = 'Title: ' + title;
+      document.getElementById('poster').src = '';
+      document.getElementById('runtime').innerHTML = '';
+      document.getElementById('showtime').innerHTML = '';
+      document.getElementById('tickets').innerHTML = '';
+    }
   });
   

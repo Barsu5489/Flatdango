@@ -26,9 +26,6 @@ Open a terminal / command line interface on your computer
 
          npm install -g json-server
 
-- Run to start get backend started
-
-          json-server --watch db.json
 
 - Run the application by clicking the link below
   - https://barsu5489.github.io/Flatdango/
