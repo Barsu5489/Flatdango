@@ -2,7 +2,7 @@
 fetch('https://my-json-server.typicode.com/Barsu5489/Flatdango/films/1')
   .then(response => response.json())
   .then(data => {
-    // Populate the page with the movie's data
+  // Populate the page with the movie's data
     document.getElementById('poster').src = data.poster;
     document.getElementById('title').innerHTML = data.title;
     document.getElementById('runtime').innerHTML = data.runtime;
@@ -46,7 +46,6 @@ document.getElementById('movie-details').addEventListener('click', event => {
     if (event.target.id === 'title') {
       // Retrieve the title's content
       const title = event.target.innerHTML;
-  
       // Update the innerHTML of the relevant elements in the movie details
       document.getElementById('title').innerHTML = 'Title: ' + title;
       document.getElementById('poster').src = '';
